@@ -15,17 +15,22 @@ string rtrim(const string &);
  */
 
 string caesarCipher(string s, int k) {
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] <= 'z' && s[i] >= 'a') {
-            s[i] += k;
-            if(s[i] > 'z') s[i] -= ('z' - 'a' + 1);
+    string res;
+    char letter;
+    for (int i; i < s.size(); i++) {
+        if (s[i] >= 'A' && s[i] <='Z') {
+            letter = 'A' + (s[i] - 'A' + k) % 26;
+            res.push_back(letter);
         }
-        if(s[i] <= 'Z' && s[i] >= 'A') {
-            s[i] += k;
-            if(s[i] > 'Z') s[i] -= ('z' - 'a' + 1);
+        else if (s[i] >= 'a' && s[i] <= 'z') {
+            letter = 'a' + (s[i] - 'a' + k) % 26;
+            res.push_back(letter);
+        }
+        else {
+            res.push_back(s.at(i));
         }
     }
-    return s;
+    return res;
 }
 
 int main()
