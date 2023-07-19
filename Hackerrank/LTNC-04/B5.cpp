@@ -26,6 +26,7 @@ int main() {
             if(arrB[i] == arrA[j]) {
                 found = true;
                 arrA.erase(arrA.begin()+j);
+                break;
             }
         }
         if(!found) {
