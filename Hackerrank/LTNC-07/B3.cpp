@@ -1,81 +1,46 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-string ltrim(const string &);
-string rtrim(const string &);
-
-/*
- * Complete the 'powerSum' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER X
- *  2. INTEGER N
- */
-
-int powerSum(int X, int N) {
-     vector<vector<int>> dp(X+1, vector<int>(X+1, 0));
-
-    for(int i=0; i<X+1; i++){
-        dp[X][i] = 0;
+int power (int a, int n) {
+    if(n == 0)
+        return 1;
+    // else
+    if(n % 2 == 0) {
+        int temp = power(a, n / 2);
+        return temp * temp;
     }
-
-    for(int i=0; i<=X; i++){
-        dp[i][X] = 1;
-    }
-
-    for(int i=X-1; i>=0; i--){
-        for(int j=X-1; j>=0; j--){
-            if(j+pow(i,N) > X) dp[i][j] = dp[i+1][j];
-            else dp[i][j] = dp[i+1][j] + dp[i+1][j+pow(i, N)];
-        }
-    }
-
-    return dp[1][0];
+    // else
+    return a * power(a, n - 1);
 }
 
-int main()
-{
-    ofstream fout(getenv("OUTPUT_PATH"));
+int solve(int x, const vector<int> &powers, int index) {
+    if(index == 0) {
+        return (x == 1) ? 1 : 0;
+    }
+    // else
+    if(x == powers[index])
+        return 1 + solve(x, powers, index - 1);
+    // else
+    int res = 0;
+    res += solve(x - powers[index], powers, index - 1);
+    res += solve(x, powers, index - 1);
+    return res;
+}
 
-    string X_temp;
-    getline(cin, X_temp);
 
-    int X = stoi(ltrim(rtrim(X_temp)));
+int main() {
+    int x, n;
+    cin >> x >> n;
 
-    string N_temp;
-    getline(cin, N_temp);
+    int pow = 1;
+    vector<int> powers;
+    for(int a = 2; pow <= x; a++) {
+        powers.push_back(pow);
+        pow = power(a, n);
+    }
 
-    int N = stoi(ltrim(rtrim(N_temp)));
-
-    int result = powerSum(X, N);
-
-    fout << result << "\n";
-
-    fout.close();
-
+    cout << solve(x, powers, powers.size() - 1) << endl;
     return 0;
-}
-
-string ltrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
-
-    return s;
-}
-
-string rtrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-        s.end()
-    );
-
-    return s;
 }
