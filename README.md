@@ -1,5 +1,6 @@
 # **INT2215_50**
 ## [BT LTNC]
+![Ngon Ngu](https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fvi.wikipedia.org%2Fwiki%2FC%252B%252B&psig=AOvVaw22ofc5np2rLPRDSn9cOp7X&ust=1691042980254000&source=images&cd=vfe&opi=89978449&ved=0CA4QjRxqFwoTCLCB-ZKovYADFQAAAAAdAAAAABAD)
 
 1. [LTNC_01](https://docs.google.com/document/d/1rVNWS9yQvCd4p4t3nbYGp8nAHkd56B8brtiEVAepU78/edit?usp=sharing)
 
